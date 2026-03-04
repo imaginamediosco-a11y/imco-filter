@@ -1,0 +1,237 @@
+/* ============================================
+   IMCO Filter - Estilos SOLO para móvil
+   (hasta 768px de ancho)
+   ============================================ */
+
+/* Cuando el panel está abierto, bloqueamos el scroll del body */
+body.imco-no-scroll {
+    overflow: hidden;
+}
+
+/* Por defecto (escritorio) ocultamos elementos móviles */
+.imco-mobile-filter-button,
+.imco-mobile-filter-overlay,
+.imco-mobile-filter-close {
+    display: none;
+}
+
+/* ===========================
+   MODO MÓVIL
+   =========================== */
+@media (max-width: 768px) {
+
+    /* El contenedor global del filtro ocupa todo el ancho
+       tanto en shop, categorías como en shortcode */
+    .imco-filter-archive {
+        width: 100%;
+        max-width: none;
+    }
+
+    /* Wrapper principal en columna (por si el layout era vertical).
+       OJO: imco-filter-archive e imco-filter-wrapper están en el MISMO div,
+       por eso usamos el selector combinado y NO con espacio. */
+    .imco-filter-archive.imco-filter-wrapper {
+        flex-direction: column;
+        gap: 16px;
+        margin: 12px 0;
+    }
+
+    /* ===========================
+       BOTÓN AZUL "FILTRAR"
+       =========================== */
+    .imco-mobile-filter-button {
+        display: flex;
+        width: 100%;
+        max-width: 360px;
+        margin: 12px auto 12px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: none;
+        background: #0f62fe;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .imco-mobile-filter-button-icon {
+        font-size: 16px;
+    }
+
+    /* ===========================
+       PANEL LATERAL (OFF-CANVAS)
+       =========================== */
+    .imco-filter-archive .imco-filter-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 85%;
+        max-width: 360px;
+        background: #ffffff;
+        z-index: 9999;
+        box-shadow: 0 0 30px rgba(15, 23, 42, 0.35);
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        border-radius: 0;
+        padding: 16px 16px 20px;
+        overflow-y: auto;
+    }
+
+    /* Título "Filtro" arriba del panel */
+    .imco-filter-archive .imco-filter-panel::before {
+        content: 'Filtro';
+        display: block;
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        color: #0f172a;
+    }
+
+    /* Botón de cierre (X) dentro del panel */
+    .imco-filter-archive .imco-mobile-filter-close {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        border: none;
+        background: transparent;
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        color: #0f172a;
+    }
+
+    /* Overlay oscuro detrás del panel */
+    .imco-filter-archive .imco-mobile-filter-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.45);
+        z-index: 9998;
+        display: none;
+    }
+
+    /* Cuando el panel está abierto */
+    .imco-filter-archive.imco-mobile-filter-open .imco-filter-panel {
+        transform: translateX(0);
+    }
+
+    .imco-filter-archive.imco-mobile-filter-open .imco-mobile-filter-overlay {
+        display: block;
+    }
+
+    /* ===========================
+       CATEGORÍAS COMO ACORDEÓN
+       =========================== */
+
+    /* FORZAR que las categorías vayan una DEBAJO de la otra,
+       incluso cuando el layout es horizontal en escritorio. */
+    .imco-filter-archive.imco-layout-horizontal .imco-filter-form {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px; /* poco espacio entre categorías */
+    }
+
+    /* Reset de estilo de grupo para móvil
+       (sin líneas, sin bordes, margen muy pequeño) */
+    .imco-filter-archive .imco-filter-group {
+        width: 100%;
+        margin: 0 0 4px 0;
+        padding: 4px 0;
+        border: none;
+        background: transparent;
+    }
+
+    .imco-filter-archive .imco-filter-group:last-of-type {
+        margin-bottom: 0;
+    }
+
+    /* El título de cada categoría se convierte en la CABECERA
+       clicable del acordeón. Sobrescribimos el estilo rojo de escritorio. */
+    .imco-filter-archive .imco-filter-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin: 0;
+        padding: 6px 10px;
+        border-radius: 8px;
+        background: #f8fafc;
+        color: #0f172a;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        cursor: pointer;
+    }
+
+    /* Flechita indicando que se puede desplegar */
+    .imco-filter-archive .imco-filter-title::after {
+        content: '▾';
+        font-size: 14px;
+        margin-left: 6px;
+        transition: transform 0.18s ease;
+    }
+
+    /* Cuando el grupo está abierto, giramos la flecha */
+    .imco-filter-archive .imco-filter-group.is-open .imco-filter-title::after {
+        transform: rotate(180deg);
+    }
+
+    /* Contenido del acordeón: por defecto oculto */
+    .imco-filter-archive .imco-filter-group .imco-filter-options,
+    .imco-filter-archive .imco-filter-group .imco-filter-select {
+        display: none;
+        margin-top: 4px;
+    }
+
+    /* Grupo abierto: se muestra el contenido */
+    .imco-filter-archive .imco-filter-group.is-open .imco-filter-options,
+    .imco-filter-archive .imco-filter-group.is-open .imco-filter-select {
+        display: block;
+    }
+
+    /* Opciones SIEMPRE en UNA sola columna en móvil */
+    .imco-filter-archive .imco-filter-options-checkbox,
+    .imco-filter-archive .imco-filter-options-buttons {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Ajuste pequeño de los chips/checkboxes dentro del panel */
+    .imco-filter-archive .imco-filter-option {
+        font-size: 14px;
+    }
+
+    .imco-mobile-panel-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        color: #0f172a;
+    }
+}
+
+/* ===== Layout de productos en móvil (IMCO Filter) ===== */
+@media (max-width: 768px) {
+
+    /* Contenedor de productos: 2 columnas SIEMPRE en móvil */
+    .imco-products-items,
+    .imco-filter-results ul.products {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* 2 productos por fila */
+        gap: 16px;
+    }
+
+    /* Cada tarjeta de producto ocupa toda la celda del grid */
+    .imco-products-items li.product,
+    .imco-filter-results ul.products li.product {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        float: none !important;
+        clear: none !important;
+    }
+}
+
