@@ -1,0 +1,70 @@
+/* Tabla de especificaciones IMCO */
+
+.imco-specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 20px 0;
+    table-layout: auto;
+}
+
+/* Celdas generales */
+.imco-specs-table th,
+.imco-specs-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #333;
+}
+
+/* Primera columna (etiquetas) con algo más de relleno */
+.imco-specs-table th {
+    font-weight: 600;
+    text-align: left;
+    width: 1% !important;          /* intenta ocupar lo mínimo posible */
+    white-space: nowrap;           /* evita saltos de línea en la etiqueta */
+    padding: 10px 24px;            /* ↑↓ 10px  | ←→ 24px (más aire a la izquierda) */
+}
+
+
+/* Segunda columna ocupa el resto del espacio */
+.imco-specs-table td {
+    width: auto;
+}
+
+/* Zebra HORIZONTAL por filas */
+.imco-specs-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.imco-specs-table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+/* Un poco más de contraste al pasar el mouse (opcional) */
+.imco-specs-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive sencillo para pantallas pequeñas */
+@media (max-width: 640px) {
+    .imco-specs-table {
+        font-size: 13px;
+    }
+
+    .imco-specs-table th,
+    .imco-specs-table td {
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 640px) {
+    .imco-specs-table {
+        font-size: 13px;
+    }
+
+    .imco-specs-table th,
+    .imco-specs-table td {
+        padding: 6px 10px; /* un pelín más que antes, pero más compacto */
+    }
+}
+
