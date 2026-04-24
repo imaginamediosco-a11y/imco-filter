@@ -1,0 +1,1160 @@
+/* ==========================================================================
+   IMCO FILTER - MODERN FRONTEND STYLES (Apple-Style)
+   Unificado: Mobile + Desktop + Single Product + Specs Table
+   ========================================================================== */
+
+/* ================================
+   VARIABLES Y RESET BÁSICO
+   ================================ */
+:root {
+    --imco-color-text: #1d1d1f;
+    --imco-color-text-muted: #86868b;
+    --imco-color-bg: #f5f5f7;
+    --imco-color-surface: #ffffff;
+    --imco-color-primary: #007aff;
+    --imco-color-primary-hover: #0056b3;
+    --imco-color-border: #e5e5ea;
+    --imco-radius-sm: 8px;
+    --imco-radius-md: 16px;
+    --imco-radius-lg: 24px;
+    --imco-radius-full: 9999px;
+    --imco-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --imco-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+    --imco-shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.imco-filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* Móvil por defecto */
+    gap: 24px;
+    margin: 24px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--imco-color-text);
+}
+
+/* ================================
+   PANEL DE FILTROS (BASE MÓVIL)
+   ================================ */
+.imco-filter-panel {
+    background: var(--imco-color-surface);
+    border-radius: var(--imco-radius-lg);
+    padding: 24px;
+    box-shadow: var(--imco-shadow-sm);
+    border: 1px solid var(--imco-color-border);
+}
+
+.imco-filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.imco-filter-group {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--imco-color-border);
+}
+
+.imco-filter-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.imco-filter-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--imco-color-text-muted);
+    margin: 0 0 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.imco-filter-toggle-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+    display: none;
+    /* Hidden by default on desktop */
+}
+
+@media (max-width: 768px) {
+    .imco-filter-title {
+        cursor: pointer;
+    }
+
+    .imco-filter-toggle-icon {
+        display: block !important;
+        width: 16px !important;
+        height: 16px !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        stroke: #333 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .imco-filter-group.imco-collapsed .imco-filter-toggle-icon {
+        transform: rotate(-180deg);
+    }
+
+    .imco-filter-group.imco-collapsed .imco-filter-options,
+    .imco-filter-group.imco-collapsed[style*="--imco-attr-option-cols"] .imco-filter-options,
+    .imco-filter-group.imco-collapsed .imco-filter-select {
+        display: none !important;
+    }
+
+    .imco-filter-group.imco-collapsed .imco-filter-title {
+        margin-bottom: 0;
+    }
+
+    /* Reduce spacing between accordions */
+    .imco-filter-form {
+        gap: 4px;
+    }
+
+    .imco-filter-group {
+        margin-bottom: 0;
+        padding-bottom: 4px;
+        border-bottom: none;
+    }
+}
+
+/* ================================
+   TIPOS DE FILTROS (NUEVOS DISEÑOS)
+   ================================ */
+
+/* Ocultar inputs nativos */
+.imco-custom-checkbox input,
+.imco-filter-pill input,
+.imco-filter-color input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* 1. CHECKBOXES MODERNOS */
+.imco-filter-options-checkbox {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.imco-custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.imco-checkbox-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1px solid #d1d1d6;
+    background: var(--imco-color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.imco-checkbox-box svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease;
+}
+
+.imco-checkbox-label {
+    font-size: 14px;
+    color: var(--imco-color-text);
+    transition: color 0.2s ease;
+}
+
+.imco-custom-checkbox:hover .imco-checkbox-box {
+    border-color: var(--imco-color-primary);
+}
+
+.imco-custom-checkbox input:checked~.imco-checkbox-box {
+    background: var(--imco-color-primary);
+    border-color: var(--imco-color-primary);
+}
+
+.imco-custom-checkbox input:checked~.imco-checkbox-box svg {
+    opacity: 1;
+    transform: scale(1);
+    color: white;
+}
+
+.imco-custom-checkbox input:checked~.imco-checkbox-label {
+    font-weight: 600;
+}
+
+/* 2. PÍLDORAS (BUTTONS) */
+.imco-filter-options-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.imco-filter-pill {
+    cursor: pointer;
+}
+
+.imco-filter-pill span {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: var(--imco-radius-full);
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--imco-color-bg);
+    color: var(--imco-color-text);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.imco-filter-pill:hover span {
+    background: #e5e5ea;
+}
+
+.imco-filter-pill input:checked~span {
+    background: var(--imco-color-text);
+    color: var(--imco-color-surface);
+}
+
+/* 3. CÍRCULOS DE COLOR (COLORS) */
+.imco-filter-options-colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 4. COLUMNAS DE OPCIONES (VARIACIONES POR FILA) */
+.imco-filter-group[style*="--imco-attr-option-cols"] .imco-filter-options {
+    display: grid !important;
+    grid-template-columns: repeat(var(--imco-attr-option-cols), minmax(0, auto));
+    justify-content: start;
+    gap: 12px 16px;
+}
+
+.imco-filter-color {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.imco-color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.imco-color-white {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.imco-color-check {
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease;
+}
+
+.imco-filter-color:hover .imco-color-swatch {
+    transform: scale(1.1);
+}
+
+.imco-filter-color input:checked~.imco-color-swatch {
+    border-color: var(--imco-color-primary);
+    padding: 2px;
+    background-clip: content-box;
+    transform: scale(1.1);
+}
+
+.imco-filter-color input:checked~.imco-color-swatch .imco-color-check {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 4. SELECTS */
+.imco-filter-select {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: var(--imco-radius-sm);
+    border: 1px solid var(--imco-color-border);
+    font-size: 14px;
+    background: var(--imco-color-surface);
+    color: var(--imco-color-text);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.imco-filter-select:focus {
+    border-color: var(--imco-color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+}
+
+/* ================================
+   ACCIONES Y CHIPS ACTIVOS
+   ================================ */
+.imco-filter-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--imco-color-border);
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+.imco-filter-submit {
+    display: none;
+    /* Oculto por defecto si usamos AJAX */
+}
+
+.imco-filter-reset {
+    font-size: 13px;
+    color: var(--imco-color-text-muted);
+    background: transparent;
+    padding: 6px 12px;
+    border-radius: var(--imco-radius-sm);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.imco-filter-reset:hover {
+    color: var(--imco-color-text);
+    background: var(--imco-color-bg);
+    border-color: var(--imco-color-border);
+    text-decoration: none;
+}
+
+.imco-active-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.imco-active-filter-chip {
+    display: inline-flex;
+    align-items: center;
+    background: var(--imco-color-bg);
+    border-radius: var(--imco-radius-sm);
+    padding: 4px 8px 4px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--imco-color-text);
+}
+
+.imco-active-filter-chip-close {
+    background: none;
+    border: none;
+    color: var(--imco-color-text-muted);
+    cursor: pointer;
+    margin-left: 6px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.imco-active-filter-chip-close:hover {
+    color: #ff3b30;
+}
+
+.imco-active-filter-chip-close svg {
+    width: 14px;
+    height: 14px;
+}
+
+.imco-active-filters-clear {
+    font-size: 13px;
+    color: var(--imco-color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* ================================
+   GRID DE PRODUCTOS (MODERNO)
+   ================================ */
+.imco-products-grid {
+    width: 100%;
+}
+
+.imco-products-grid ul.products,
+.imco-products-grid .imco-products-items {
+    display: grid;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* 2 columnas en móvil */
+}
+
+.imco-products-grid.imco-loading {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.imco-products-grid ul.products li.product,
+.imco-products-grid .product {
+    background: var(--imco-color-surface);
+    border-radius: var(--imco-radius-lg);
+    border: 1px solid var(--imco-color-border);
+    padding: 16px;
+    text-align: center;
+    box-shadow: var(--imco-shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.imco-products-grid ul.products li.product:hover,
+.imco-products-grid .product:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--imco-shadow-lg);
+}
+
+.imco-products-grid ul.products li.product img,
+.imco-products-grid .product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--imco-radius-md);
+    margin-bottom: 12px;
+}
+
+.imco-products-grid ul.products li.product .woocommerce-loop-product__title,
+.imco-products-grid .product .woocommerce-loop-product__title {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 8px;
+    color: var(--imco-color-text);
+}
+
+.imco-products-grid ul.products li.product .price,
+.imco-products-grid .product .price {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--imco-color-text);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.imco-products-grid ul.products li.product .button,
+.imco-products-grid .product .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--imco-radius-full);
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    background: var(--imco-color-text);
+    color: var(--imco-color-surface);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.imco-products-grid ul.products li.product .button:hover,
+.imco-products-grid .product .button:hover {
+    background: #000000;
+    transform: scale(1.02);
+}
+
+/* ================================
+   PAGINACIÓN
+   ================================ */
+.imco-pagination {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.imco-pagination-pages .imco-page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: var(--imco-radius-full);
+    border: 1px solid var(--imco-color-border);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--imco-color-text);
+    background: var(--imco-color-surface);
+    transition: all 0.2s ease;
+}
+
+.imco-pagination-pages .imco-page-link:hover {
+    border-color: var(--imco-color-text);
+}
+
+.imco-pagination-pages .imco-page-link.is-active {
+    background: var(--imco-color-text);
+    color: var(--imco-color-surface);
+    border-color: var(--imco-color-text);
+}
+
+.imco-pagination-load-more .imco-load-more-button {
+    padding: 12px 24px;
+    border-radius: var(--imco-radius-full);
+    border: none;
+    background: var(--imco-color-text);
+    color: var(--imco-color-surface);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.imco-pagination-load-more .imco-load-more-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--imco-shadow-md);
+}
+
+/* ================================
+   COMPORTAMIENTO MÓVIL (Off-Canvas)
+   ================================ */
+@media (max-width: 768px) {
+    body.imco-no-scroll {
+        overflow: hidden;
+    }
+
+    .imco-filter-archive {
+        width: 100%;
+    }
+
+    .imco-mobile-filter-button {
+        display: flex;
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding: 12px 20px;
+        border-radius: var(--imco-radius-full);
+        border: 1px solid var(--imco-color-border);
+        background: var(--imco-color-surface);
+        color: var(--imco-color-text);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: var(--imco-shadow-sm);
+    }
+
+    .imco-filter-archive .imco-filter-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 85%;
+        max-width: 360px;
+        background: var(--imco-color-surface);
+        z-index: 9999;
+        box-shadow: var(--imco-shadow-lg);
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 0;
+        padding: 24px;
+        overflow-y: auto;
+        border: none;
+    }
+
+    .imco-filter-archive .imco-filter-panel::before {
+        content: 'Filtros';
+        display: block;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 24px;
+        color: var(--imco-color-text);
+    }
+
+    .imco-filter-archive .imco-mobile-filter-close {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        border: none;
+        background: var(--imco-color-bg);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+        color: var(--imco-color-text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .imco-filter-archive .imco-mobile-filter-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+        z-index: 9998;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .imco-filter-archive.imco-mobile-filter-open .imco-filter-panel {
+        transform: translateX(0);
+    }
+
+    .imco-filter-archive.imco-mobile-filter-open .imco-mobile-filter-overlay {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Acordeón en móvil */
+    .imco-filter-archive .imco-filter-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--imco-color-bg);
+        padding: 12px 16px;
+        border-radius: var(--imco-radius-sm);
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+
+    .imco-filter-archive .imco-filter-group .imco-filter-options,
+    .imco-filter-archive .imco-filter-group .imco-filter-select {
+        padding: 16px 8px 0;
+    }
+
+    /* Columnas dinámicas de productos en móvil */
+    .woocommerce .imco-products-grid.imco-columns-mobile-1 ul.products,
+    .woocommerce .imco-products-grid.imco-columns-mobile-1 .imco-products-items,
+    .imco-products-grid.imco-columns-mobile-1 ul.products,
+    .imco-products-grid.imco-columns-mobile-1 .imco-products-items {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+    }
+
+    .woocommerce .imco-products-grid.imco-columns-mobile-2 ul.products,
+    .woocommerce .imco-products-grid.imco-columns-mobile-2 .imco-products-items,
+    .imco-products-grid.imco-columns-mobile-2 ul.products,
+    .imco-products-grid.imco-columns-mobile-2 .imco-products-items {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .woocommerce .imco-products-grid.imco-columns-mobile-3 ul.products,
+    .woocommerce .imco-products-grid.imco-columns-mobile-3 .imco-products-items,
+    .imco-products-grid.imco-columns-mobile-3 ul.products,
+    .imco-products-grid.imco-columns-mobile-3 .imco-products-items {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .woocommerce .imco-products-grid.imco-columns-mobile-4 ul.products,
+    .woocommerce .imco-products-grid.imco-columns-mobile-4 .imco-products-items,
+    .imco-products-grid.imco-columns-mobile-4 ul.products,
+    .imco-products-grid.imco-columns-mobile-4 .imco-products-items {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+}
+
+/* ================================
+   COMPORTAMIENTO ESCRITORIO
+   ================================ */
+@media (min-width: 769px) {
+
+    .imco-mobile-filter-button,
+    .imco-mobile-filter-overlay,
+    .imco-mobile-filter-close {
+        display: none !important;
+    }
+
+    /* Filtro Colapsable en Escritorio */
+    .imco-collapsible-filter .imco-mobile-filter-button {
+        display: inline-flex !important;
+        margin-bottom: 0;
+        align-self: flex-start;
+        background: #ff0000;
+        /* Red button like screenshot */
+        color: white;
+        border-radius: 999px;
+        padding: 8px 24px;
+        font-weight: 600;
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .imco-collapsible-filter .imco-mobile-filter-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(255, 0, 0, 0.4);
+    }
+
+    .imco-collapsible-filter .imco-filter-panel {
+        display: none;
+        margin-top: 24px;
+    }
+
+    .imco-collapsible-filter.imco-desktop-open .imco-filter-panel {
+        display: block;
+        animation: imcoFadeInDown 0.3s ease forwards;
+    }
+
+    .imco-collapsible-filter.imco-layout-vertical {
+        flex-direction: column;
+        /* Keep column layout for the button to be on top */
+    }
+
+    .imco-collapsible-filter.imco-layout-vertical.imco-desktop-open {
+        flex-direction: row;
+        /* Switch to row when open */
+        flex-wrap: wrap;
+    }
+
+    .imco-collapsible-filter.imco-layout-vertical .imco-mobile-filter-button {
+        width: 100%;
+        /* Or auto */
+    }
+
+    @keyframes imcoFadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .imco-layout-vertical {
+        flex-direction: row;
+    }
+
+    .imco-layout-vertical .imco-filter-panel {
+        flex: 0 0 280px;
+    }
+
+    .imco-layout-vertical .imco-filter-results {
+        flex: 1;
+    }
+
+    .imco-layout-horizontal .imco-filter-form {
+        display: grid;
+        grid-template-columns: repeat(var(--imco-attr-group-cols, 4), minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    /* Columnas dinámicas de productos en escritorio */
+    .woocommerce .imco-products-grid.imco-columns-2 ul.products,
+    .woocommerce .imco-products-grid.imco-columns-2 .imco-products-items,
+    .imco-products-grid.imco-columns-2 ul.products,
+    .imco-products-grid.imco-columns-2 .imco-products-items {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .woocommerce .imco-products-grid.imco-columns-3 ul.products,
+    .woocommerce .imco-products-grid.imco-columns-3 .imco-products-items,
+    .imco-products-grid.imco-columns-3 ul.products,
+    .imco-products-grid.imco-columns-3 .imco-products-items {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .woocommerce .imco-products-grid.imco-columns-4 ul.products,
+    .woocommerce .imco-products-grid.imco-columns-4 .imco-products-items,
+    .imco-products-grid.imco-columns-4 ul.products,
+    .imco-products-grid.imco-columns-4 .imco-products-items {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    .woocommerce .imco-products-grid.imco-columns-5 ul.products,
+    .woocommerce .imco-products-grid.imco-columns-5 .imco-products-items,
+    .imco-products-grid.imco-columns-5 ul.products,
+    .imco-products-grid.imco-columns-5 .imco-products-items {
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    }
+
+    .woocommerce .imco-products-grid.imco-columns-6 ul.products,
+    .woocommerce .imco-products-grid.imco-columns-6 .imco-products-items,
+    .imco-products-grid.imco-columns-6 ul.products,
+    .imco-products-grid.imco-columns-6 .imco-products-items {
+        grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Ocultar WooCommerce nativo */
+body.imco-hide-woo-loop .woocommerce-breadcrumb,
+body.imco-hide-woo-loop .woocommerce .woocommerce-products-header,
+body.imco-hide-woo-loop .woocommerce .page-title,
+body.imco-hide-woo-loop .woocommerce .woocommerce-result-count,
+body.imco-hide-woo-loop .woocommerce .woocommerce-ordering,
+body.imco-hide-woo-loop .woocommerce ul.products {
+    display: none !important;
+}
+
+/* Asegurar que el grid de IMCO sí se muestre aunque esté dentro de .woocommerce */
+body.imco-hide-woo-loop .woocommerce .imco-products-grid ul.products,
+.woocommerce .imco-filter-archive .imco-products-grid ul.products,
+.imco-filter-archive .imco-products-grid ul.products {
+    display: grid !important;
+}
+
+/* ==========================================================================
+   IMCO FILTER - SINGLE PRODUCT MODERN TEMPLATE (Apple-Style)
+   ========================================================================== */
+
+.imco-modern-product-container {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 40px 20px 80px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.imco-modern-product-wrapper {
+    max-width: 600px;
+    /* Diseño centrado y enfocado */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Meta: Referencia y Categoría */
+.imco-product-meta-top {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.imco-sku,
+.imco-category {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #86868b;
+}
+
+.imco-category a {
+    color: #007aff;
+    text-decoration: none;
+}
+
+/* Título */
+.imco-product-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #1d1d1f;
+    margin: 0 0 32px 0;
+    line-height: 1.2;
+}
+
+/* Galería */
+.imco-product-gallery {
+    border-radius: 24px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    background: #f5f5f7;
+}
+
+.imco-product-gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 24px;
+}
+
+/* Precio */
+.imco-product-price {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.imco-product-price .price {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1d1d1f;
+}
+
+/* Botón de compra (Forzando estilo moderno sobre Woo) */
+.imco-product-add-to-cart {
+    margin-bottom: 48px;
+    display: flex;
+    justify-content: center;
+}
+
+.imco-product-add-to-cart form.cart {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    width: 100%;
+}
+
+.imco-product-add-to-cart .quantity input {
+    width: 60px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid #d1d1d6;
+    text-align: center;
+    font-size: 16px;
+    background: #fbfbfd;
+}
+
+.imco-product-add-to-cart button.single_add_to_cart_button {
+    background: #007aff !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 999px !important;
+    padding: 12px 32px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 14px rgba(0, 122, 255, 0.3) !important;
+}
+
+.imco-product-add-to-cart button.single_add_to_cart_button:hover {
+    transform: scale(1.02) !important;
+    background: #0056b3 !important;
+}
+
+/* ==========================================================================
+   IMCO FILTER - TABS MODERNOS (Reemplaza acordeones)
+   ========================================================================== */
+.imco-tabs-wrapper {
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.imco-tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #f1f5f9;
+    /* Gris muy claro */
+    padding: 0.375rem;
+    border-radius: 9999px;
+    /* Forma de píldora */
+    width: fit-content;
+    margin: 0 auto 2rem auto;
+}
+
+.imco-tab-btn {
+    background: transparent;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    outline: none;
+}
+
+.imco-tab-btn:hover {
+    color: #0f172a;
+}
+
+.imco-tab-btn.active {
+    background-color: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.imco-tab-content {
+    display: none;
+    animation: imcoFadeIn 0.3s ease;
+}
+
+.imco-tab-content.active {
+    display: block;
+}
+
+@keyframes imcoFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste de la tabla dentro del tab */
+.imco-tab-content .imco-modern-specs-container {
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+
+/* ==========================================================================
+   IMCO FILTER - MODERN SPECS TABLE (Apple-Style)
+   ========================================================================== */
+
+/* Contenedor principal de la tabla */
+.imco-modern-specs-container {
+    background: #fbfbfd;
+    border-radius: 18px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e5e5ea;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Cabecera (Icono + Título) */
+.imco-modern-specs-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e5ea;
+}
+
+/* Controlar el tamaño del icono principal (para que no se vea gigante) */
+.imco-modern-specs-icon svg {
+    width: 32px;
+    height: 32px;
+    color: #1d1d1f;
+    display: block;
+}
+
+.imco-modern-specs-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+/* Cuadrícula de especificaciones */
+.imco-modern-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+/* Cada ítem de especificación (tarjeta) */
+.imco-spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #f2f2f7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.imco-spec-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Ítems que ocupan todo el ancho (Producto, Precio) */
+.imco-spec-full {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e5ea;
+    border-radius: 0;
+}
+
+.imco-spec-full:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Contenedor de la etiqueta y su icono pequeño */
+.imco-spec-label-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #86868b;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Controlar el tamaño de los iconos pequeños */
+.imco-spec-icon svg {
+    width: 16px;
+    height: 16px;
+    color: #86868b;
+    display: block;
+}
+
+/* El valor de la especificación */
+.imco-spec-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1d1d1f;
+    line-height: 1.4;
+}
+
+.imco-spec-full .imco-spec-value {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 600px) {
+    .imco-modern-specs-container {
+        padding: 20px;
+    }
+
+    .imco-modern-specs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .imco-spec-full {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}

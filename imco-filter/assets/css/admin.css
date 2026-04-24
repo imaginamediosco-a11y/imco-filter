@@ -1,0 +1,268 @@
+/* Estilos del área de administración para IMCO Filter */
+
+/* =======================================
+   SWITCHES (Ajustes del plugin)
+   ======================================= */
+
+.imco-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    max-width: 700px;
+}
+
+.imco-switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 56px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+/* Ocultamos el checkbox real */
+.imco-switch input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Pista del switch (fondo) */
+.imco-switch-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background-color: #e2e8f0;
+    transition: background-color 0.18s ease;
+    box-sizing: border-box;
+}
+
+/* Bola del switch */
+.imco-switch-slider::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+    transition: transform 0.18s ease;
+}
+
+/* Estado ON */
+.imco-switch input:checked+.imco-switch-slider {
+    background-color: #0f172a;
+}
+
+/* Bola desplazada (ON) */
+.imco-switch input:checked+.imco-switch-slider::before {
+    transform: translateX(30px);
+}
+
+/* Texto a la derecha del switch */
+.imco-switch-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.imco-switch-title {
+    font-weight: 600;
+}
+
+.imco-switch-text .description {
+    margin: 0;
+}
+
+/* =======================================
+   METABOX DE PRODUCTO (Atributos IMCO)
+   ======================================= */
+
+.imco-product-attributes-wrapper {
+    margin-top: 8px;
+}
+
+.imco-product-attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+/* Tarjeta de cada categoría */
+.imco-product-attribute-box {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    /* para que la cabecera siga el borde redondeado */
+}
+
+/* CABECERA de la categoría */
+.imco-product-attribute-title {
+    margin: 0;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #ff050b;
+    /* fondo suave */
+    border-bottom: 1px solid #e5e7eb;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* Contenedor de opciones (2 columnas) */
+.imco-product-attribute-options {
+    padding: 10px 12px 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 10px;
+}
+
+.imco-product-attribute-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #111827;
+}
+
+.imco-product-attribute-option input[type="checkbox"] {
+    margin: 0;
+}
+
+.imco-product-attributes-helper {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #6b7280;
+}
+
+/* ==========================================================================
+   IMCO FILTER - MODERN ADMIN STYLES (Apple-Style)
+   ========================================================================== */
+
+.imco-modern-admin {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 1100px;
+    margin-top: 20px;
+    color: #1d1d1f;
+}
+
+.imco-modern-admin h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+}
+
+.imco-modern-admin h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5ea;
+}
+
+.imco-modern-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    padding: 32px;
+    margin-bottom: 32px;
+    border: 1px solid #f2f2f7;
+}
+
+.imco-modern-admin .form-table th {
+    font-weight: 600;
+    color: #1d1d1f;
+    padding-top: 18px;
+}
+
+.imco-modern-admin input[type="text"],
+.imco-modern-admin input[type="number"],
+.imco-modern-admin select,
+.imco-modern-admin textarea {
+    border-radius: 8px;
+    border: 1px solid #d1d1d6;
+    padding: 8px 12px;
+    box-shadow: none;
+    transition: all 0.2s ease;
+    background-color: #fbfbfd;
+    width: 100%;
+    max-width: 400px;
+}
+
+.imco-modern-admin textarea {
+    max-width: 100%;
+}
+
+.imco-modern-admin input[type="text"]:focus,
+.imco-modern-admin select:focus,
+.imco-modern-admin textarea:focus {
+    border-color: #007aff;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+    background-color: #ffffff;
+    outline: none;
+}
+
+.imco-modern-admin p.description {
+    color: #86868b;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.imco-modern-admin .button-primary {
+    background: #007aff !important;
+    border-color: #007aff !important;
+    border-radius: 8px !important;
+    padding: 6px 20px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(0, 122, 255, 0.2) !important;
+    transition: all 0.2s ease !important;
+    color: white !important;
+}
+
+.imco-modern-admin .button-primary:hover {
+    background: #0056b3 !important;
+    border-color: #0056b3 !important;
+    transform: translateY(-1px);
+}
+
+.imco-modern-admin .widefat {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e5ea;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.imco-modern-admin .widefat th {
+    background: #f5f5f7;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: #86868b;
+    padding: 16px 12px;
+}
+
+.imco-modern-admin .widefat td {
+    padding: 16px 12px;
+    vertical-align: middle;
+}
+
+.imco-modern-admin .imco-actions a {
+    color: #007aff;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.imco-modern-admin .imco-actions a:hover {
+    text-decoration: underline;
+}
+
+.imco-modern-admin .delete-link {
+    color: #ff3b30 !important;
+}
